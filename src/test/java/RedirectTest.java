@@ -14,6 +14,20 @@ public class RedirectTest {
                 .andReturn();
 
         String locationHeader = response.getHeader("location");
-        System.out.println(locationHeader);
+        int status = response.statusCode();
+
+        while (status != 200) {
+            System.out.println(locationHeader);
+            response = RestAssured
+                    .given()
+                    .redirects()
+                    .follow(false)
+                    .when()
+                    .get(locationHeader)
+                    .andReturn();
+
+            locationHeader = response.getHeader("location");
+            status = response.statusCode();
+        }
     }
 }
