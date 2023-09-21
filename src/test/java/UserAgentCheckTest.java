@@ -25,9 +25,12 @@ public class UserAgentCheckTest {
                 .jsonPath();
 
         assertAll(
-                () -> assertEquals(platform, response.getString("platform"), "'platform' value does not valid"),
-                () -> assertEquals(browser, response.getString("browser"), "'browser' value does not valid"),
-                () -> assertEquals(device, response.getString("device"), "'device' value does not valid")
+                () -> assertEquals(platform, response.getString("platform"), "'platform' value does not valid. "
+                        + "User-Agent = " + user_agent),
+                () -> assertEquals(browser, response.getString("browser"), "'browser' value does not valid. "
+                        + "User-Agent = " + user_agent),
+                () -> assertEquals(device, response.getString("device"), "'device' value does not valid. "
+                        + "User-Agent = " + user_agent)
         );
     }
 }
